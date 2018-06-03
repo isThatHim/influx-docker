@@ -10,6 +10,7 @@ client.switch_database('mdt')
 while True:
     currentCPU = psutil.cpu_percent()
     currentMemory = psutil.virtual_memory()
+    currentDisk = psutil.disk_usage('/')
 
     payload = [ 
             { 
@@ -32,7 +33,18 @@ while True:
                 "fields": {
                     "MEMpercent": currentMemory.percent
                 }
+            },
+            {
+                "measurement": "stats", 
+                "tags": {
+                    "host": "laptop",
+                    "metric": "Disk"
+                },
+                "fields": {
+                    "DISKpercent": currentDisk.percent
+                }
             }
+
     ]
     
     response = client.write_points(payload)
@@ -40,9 +52,9 @@ while True:
     print("Response:", response)
     print("------------------------")
     
-    results = client.query('SELECT "CPUpercent" FROM "mdt"."autogen"."stats" WHERE time > now() - 10s')
-    print("Results", results.raw)
-    print(">-----------------------<")
+    #results = client.query('SELECT "CPUpercent" FROM "mdt"."autogen"."stats" WHERE time > now() - 10s')
+    #print("Results", results.raw)
+    #print(">-----------------------<")
 
     time.sleep(5)
     
