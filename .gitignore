@@ -1,0 +1,5 @@
+venv/
+data/influxdb/
+data/kapacitor/
+logs/
+.vscode/
