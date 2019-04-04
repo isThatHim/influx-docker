@@ -11,12 +11,14 @@ while True:
     currentCPU = psutil.cpu_percent()
     currentMemory = psutil.virtual_memory()
     currentDisk = psutil.disk_usage('/')
+    currentDiskIO = psutil.disk_io_counters()
+    currentNetworkIO = psutil.net_io_counters()
 
     payload = [ 
             { 
                 "measurement": "stats", 
                 "tags": {
-                    "host": "laptop",
+                    "host": "NUC",
                     "metric": "CPU"
                 },
                 "fields": { 
@@ -27,7 +29,7 @@ while True:
             {
                 "measurement": "stats", 
                 "tags": {
-                    "host": "laptop",
+                    "host": "NUC",
                     "metric": "Memory"
                 },
                 "fields": {
@@ -37,14 +39,53 @@ while True:
             {
                 "measurement": "stats", 
                 "tags": {
-                    "host": "laptop",
+                    "host": "NUC",
                     "metric": "Disk"
                 },
                 "fields": {
                     "DISKpercent": currentDisk.percent
                 }
+            },
+            {
+                "measurement": "stats", 
+                "tags": {
+                    "host": "NUC",
+                    "metric": "Disk"
+                },
+                "fields": {
+                    "DISKread": currentDiskIO.read_bytes
+                }
+            },
+            {
+                "measurement": "stats", 
+                "tags": {
+                    "host": "NUC",
+                    "metric": "Disk"
+                },
+                "fields": {
+                    "DISKwrite": currentDiskIO.write_bytes
+                }
+            },
+            {
+                "measurement": "stats", 
+                "tags": {
+                    "host": "NUC",
+                    "metric": "Network"
+                },
+                "fields": {
+                    "NETrecv": currentNetworkIO.bytes_recv
+                }
+            },
+            {
+                "measurement": "stats", 
+                "tags": {
+                    "host": "NUC",
+                    "metric": "Network"
+                },
+                "fields": {
+                    "NETsent": currentNetworkIO.bytes_sent
+                }
             }
-
     ]
     
     response = client.write_points(payload)

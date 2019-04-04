@@ -1,10 +1,12 @@
 # influx-docker
-A Skeleton InfluxDB + Kapacitor + Grafana
+InfluxDB + Telgraf + Kapacitor + Chronograf + Grafana for System Monitoring
 
 This repository contains a docker-compose file to bring up an integrated
-Influxdata InfluxDB, Influxdata Kapacitor and Grafana. It is provided with a
-Python script (data_source.py) which can be run to produce test data in the
-database using metrics from the local machine.
+Influxdata InfluxDB, Telgraf, Chronograf, Kapacitor, and Grafana stack. It is
+provided with a Python script (data_source.py) which can be run as an example
+to produce test data in the database using metrics from the local machine.
+Telegraf is also configured to collect various metrics from a Synology NAS
+using the Synology SNMP MIBs.
 
 ## Usage
 
@@ -14,6 +16,16 @@ requirements.txt. To install the Python modules, use:
 ```
 $ pip install -r requirements.txt
 ```
+
+It also requires you to download and install the required SNMP MIBs to the
+data/mibs directory. Apologies, but Synology SNMP MIBs are Copyright, so we 
+cannot include them in this GitHub repository.
+
+To download the Synology MIB file, go to:
+https://global.download.synology.com/download/Document/MIBGuide/Synology_MIB_File.zip
+
+Simply unzip the Synology_MIB_File.zip, placing all the resulting files in the
+data/mibs directory.
 
 ### Running
 ```
@@ -26,6 +38,8 @@ In order to initialise this:
 
 ```
 $ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mdt"
+$ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE
+DATABASE synology"
 ```
 
 You may now execute the test script:
@@ -42,5 +56,7 @@ _import_ a dashboard. Browse to the local directory and import the sample JSON
 file provided (CPU-and-Memory.json). This dashboard should load and start to
 provide graphs and tables using the test data.
 
+
 --
 Richard Wade (rik@rikwade.com)
+

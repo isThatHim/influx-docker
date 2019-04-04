@@ -2,4 +2,5 @@ venv/
 data/influxdb/
 data/kapacitor/
 logs/
+data/mibs/SYNOLOGY-*-MIB.txt
 .vscode/
