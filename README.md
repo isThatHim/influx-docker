@@ -57,6 +57,6 @@ password admin, to access Grafana. Here, navigate to the Dashboard tab, and
 _import_ a dashboard. Browse to the local directory and import the sample JSON
 file provided (CPU-and-Memory.json). This dashboard should load and start to
 provide graphs and tables using the test data.
---
+
 Richard Wade (rik@rikwade.com)
 
