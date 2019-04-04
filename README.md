@@ -32,9 +32,11 @@ data/mibs directory.
 $ docker-compose up
 ```
 
-will start the components. Given many people will be using this to work with
-Model Driven Telemetry, the test script uses an InfluxDB database called 'mdt'.
-In order to initialise this:
+will start the components. 
+
+You will need to create the databases in InfluxDB in order to store time-series
+values for the various metrics. The configuration currently uses two databases,
+one for telemetry data and one for Synology SNMP data.
 
 ```
 $ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mdt"
@@ -42,7 +44,9 @@ $ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE
 DATABASE synology"
 ```
 
-You may now execute the test script:
+You may now execute the test script. This is only required in order to put some
+example data in the mdt database from the host Linux system:
+
 ```
 $ python data_source.py
 ```
@@ -55,8 +59,6 @@ password admin, to access Grafana. Here, navigate to the Dashboard tab, and
 _import_ a dashboard. Browse to the local directory and import the sample JSON
 file provided (CPU-and-Memory.json). This dashboard should load and start to
 provide graphs and tables using the test data.
-
-
 --
 Richard Wade (rik@rikwade.com)
 
