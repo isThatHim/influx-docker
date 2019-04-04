@@ -33,6 +33,16 @@ $ docker-compose up
 
 will start the components. 
 
+Before running, you should edit the data/telegraf.conf file to insert the IP
+address and SNMP Read community string for your Synology NAS. Update the
+following lines with your system's information:
+```
+agents = [ "192.168.1.2" ]
+```
+```
+community = "public"
+```
+
 You will need to create the databases in InfluxDB in order to store time-series
 values for the various metrics. The configuration currently uses two databases,
 one for telemetry data and one for Synology SNMP data.
