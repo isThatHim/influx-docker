@@ -24,8 +24,7 @@ cannot include them in this GitHub repository.
 To download the Synology MIB file, go to:
 https://global.download.synology.com/download/Document/MIBGuide/Synology_MIB_File.zip
 
-Simply unzip the Synology_MIB_File.zip, placing all the resulting files in the
-data/mibs directory.
+Simply unzip the Synology_MIB_File.zip, placing all the resulting files in the data/mibs directory.
 
 ### Running
 ```
@@ -40,8 +39,7 @@ one for telemetry data and one for Synology SNMP data.
 
 ```
 $ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mdt"
-$ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE
-DATABASE synology"
+$ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE synology"
 ```
 
 You may now execute the test script. This is only required in order to put some
