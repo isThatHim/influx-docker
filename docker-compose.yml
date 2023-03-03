@@ -75,3 +75,15 @@ services:
     links:
       - influxdb
 
+  # Define a service for using the kapacitor CLI tool.
+  # docker-compose run kapacitor-cli
+  kapacitor-cli:
+    image: kapacitor:latest
+    entrypoint: bash
+    environment:
+      KAPACITOR_URL: http://kapacitor:9092
+    volumes:
+      - ./data/ticks:/root/ticks
+    links:
+      - kapacitor
+
