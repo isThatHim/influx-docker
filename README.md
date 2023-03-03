@@ -6,6 +6,7 @@ InfluxDB + Telgraf + Kapacitor + Chronograf
 ### Running
 ```
 $ docker-compose up
+```
 
 You will need to create the databases in InfluxDB in order to store time-series
 values for the various metrics. The configuration currently uses two databases,
