@@ -21,7 +21,6 @@ services:
     image: telegraf:latest
     container_name: telegraf
     volumes:
-      - ./data/mibs:/usr/share/snmp/mibs
       - ./data/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     links:
         - influxdb
